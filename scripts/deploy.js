@@ -7,6 +7,7 @@ const main = async () => {
   const pollManagerFactory = await hre.ethers.getContractFactory("PollManager");
   const pollManagerContract = await pollManagerFactory.deploy();
   await pollManagerContract.deployed();
+  console.log(pollManagerContract.address)
 
 }
 

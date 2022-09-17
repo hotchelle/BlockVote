@@ -16,7 +16,7 @@ contract PollManager {
     }
 
     // add user's vote to a poll 
-    function insertVote(string memory pollName, address voterAddress, string memory vote) public {
+function insertVote(string memory pollName, address voterAddress, string memory vote) public {
         console.log("Inserting vote into ",pollName, "for the user with the address", voterAddress);
         Poll poll = titleToPoll[pollName];
         poll.addVote(voterAddress, vote);
