@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import {useUserAuth} from "../context/UserAuthContext";
+import { useUserAuth } from '../context/UserAuthContext';
 
 //This component makes sure that the user has access to components after signing in to the application
 //Wrap this component on any component that you need to use that happens after authentication

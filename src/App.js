@@ -1,10 +1,34 @@
 import './App.css';
-import Functionalities from './Components/Functionalities';
+import Login from './components/Login';
+import { Routes, Route } from "react-router-dom";
+import { Col, Container, Row } from 'react-bootstrap';
+import Register from './components/Register';
+import { UserAuthContextProvider } from "./context/UserAuthContext"
+import ProtectedRoute from './components/ProtectedRoute';
+import Home from './components/Home';
+import ResetPassword from './components/ResetPassword';
+import Functionalities from './components/Functionalities';
+
 function App() {
   return (
-    <div className="App">
-      <Functionalities/>
-    </div>
+    <Container>
+      <Row>
+        <Col>
+          <UserAuthContextProvider>
+            <Routes>
+              <Route path="/home" element={
+              <ProtectedRoute>
+                <Home/>
+              </ProtectedRoute>
+            }/>
+              <Route path="/" element={<Login />} />
+              <Route path = "/RecoverPassword" element= {<ResetPassword/>}/>
+              <Route path="/Register" element={<Register />} />
+            </Routes>
+          </UserAuthContextProvider>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
