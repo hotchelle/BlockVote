@@ -1,5 +1,6 @@
 import './App.css';
 import Login from './Components/Login';
+import Vote from './Components/Vote';
 import Landing from './Components/Landing';
 import { Routes, Route } from "react-router-dom";
 import { Col, Container, Row } from 'react-bootstrap';
@@ -19,12 +20,14 @@ function App() {
             <Routes>
               <Route path="/home" element={
               <ProtectedRoute>
-                <Landing/>
+                <Home/>
               </ProtectedRoute>
             }/>
               <Route path="/" element={<Login />} />
               <Route path = "/RecoverPassword" element= {<ResetPassword/>}/>
               <Route path="/Register" element={<Register />} />
+              <Route path="/Landing" element={<Landing />} />
+              <Route path="/Vote" element={<Vote />} />
             </Routes>
           </UserAuthContextProvider>
         </Col>
