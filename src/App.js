@@ -1,13 +1,14 @@
 import './App.css';
-import Login from './components/Login';
+import Login from './Components/Login';
+import Landing from './Components/Landing';
 import { Routes, Route } from "react-router-dom";
 import { Col, Container, Row } from 'react-bootstrap';
-import Register from './components/Register';
+import Register from './Components/Register';
 import { UserAuthContextProvider } from "./context/UserAuthContext"
-import ProtectedRoute from './components/ProtectedRoute';
-import Home from './components/Home';
-import ResetPassword from './components/ResetPassword';
-import Functionalities from './components/Functionalities';
+import ProtectedRoute from './Components/ProtectedRoute';
+import Home from './Components/Home';
+import ResetPassword from './Components/ResetPassword';
+import Functionalities from './Components/Functionalities';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
             <Routes>
               <Route path="/home" element={
               <ProtectedRoute>
-                <Home/>
+                <Landing/>
               </ProtectedRoute>
             }/>
               <Route path="/" element={<Login />} />
