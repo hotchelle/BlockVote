@@ -11,6 +11,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import img1 from "./Assets/img1.png";
 import img2 from "./Assets/img2.png";
 import img3 from "./Assets/img3.png";
+import logo from "./Assets/Logo.png";
 
 // Import Swiper styles
 import "swiper/css";
@@ -49,7 +50,7 @@ const Home = () => {
     </div>
     
     
-
+  
     <div styles={{'flex': 1}}>
         <Swiper
           cssMode={true}

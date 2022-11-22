@@ -9,7 +9,7 @@ import { UserAuthContextProvider } from "./context/UserAuthContext"
 import ProtectedRoute from './Components/ProtectedRoute';
 import Home from './Components/Home';
 import ResetPassword from './Components/ResetPassword';
-import Functionalities from './Components/Functionalities';
+import Demo from './Components/Functionalities';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
             <Routes>
               <Route path="/home" element={
               <ProtectedRoute>
-                <Home/>
+                <Demo/>
               </ProtectedRoute>
             }/>
               <Route path="/" element={<Login />} />
@@ -28,6 +28,7 @@ function App() {
               <Route path="/Register" element={<Register />} />
               <Route path="/Landing" element={<Landing />} />
               <Route path="/Vote" element={<Vote />} />
+              <Route path="/Demo" element={<Demo />} />
             </Routes>
           </UserAuthContextProvider>
         </Col>

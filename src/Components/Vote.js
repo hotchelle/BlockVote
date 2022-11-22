@@ -3,6 +3,9 @@ import { getContractAddress, poll } from "ethers/lib/utils";
 import React , {useState, useEffect} from "react";
 import abi from "../utils/ProjectManager.json"
 
+import logo from "./Assets/Logo.png";
+
+
 const Vote =  () => {
   const [userAccount, setUserAccount] = useState("");
   const [newPollName, setnewPollName] = useState("");
@@ -107,35 +110,39 @@ const getVotes = async (pollName) => {
   }, [])
   return (
     <div className="demoDiv">
-        <h1>Functionalities Demo</h1>
-        <h5>Create poll</h5>
+      <div><img src={logo} class="vote-ribbon"/></div>
+
+      <div className="vote-header">
+        <h2>Place a Vote</h2>
+
+        <h4>Connect your wallet below and select a poll to place a vote in</h4>
+
+
         {!userAccount &&  <button className="buttonFunct" onClick={() => connectToWallet()}> Connect to Wallet </button>}
-        <label>Poll Name</label>
-        <input className="inputFunct" type = "text" value = {newPollName} onChange={(event) => setnewPollName(event.target.value)}/>
-        <button className="buttonFunct" onClick={() => {
-          createPoll(newPollName)
-          setnewPollName("Enter new poll name")
-        }}> Create Poll </button>
-        <h5>Add vote to poll</h5>
-        <label>Poll Name</label>
-        <input className="inputFunct" type = "text" value={votePoll} onChange={(event) => setvotePoll(event.target.value)}/>
-        <label>Vote</label>
-        <input className="inputFunct" type = "text" value={vote} onChange={(event) => setVote(event.target.value)}/>
+        
+
+
+        
+
+        <div className ="vote">
+          <input className="inputFunct" placeholder="Poll Name" type = "text" value={votePoll} onChange={(event) => setvotePoll(event.target.value)}/>
+        </div>
+
+        <div className ="vote">
+        <input className="inputFunct" placeholder="Vote (Yes/No)" type = "text" value={vote} onChange={(event) => setVote(event.target.value)}/>
+        </div>
+        <div className = "vote">
         <button className="buttonFunct" onClick={() => {
           addVote(votePoll, vote)
           setvotePoll("")
           setVote("")
         }}> Add vote to poll </button>
-        <h5>See all votes from a poll</h5>
-        <label>Poll Name</label>
-        <input className="inputFunct" type = "text" value={rPollName} onChange={(event) => setRPollName(event.target.value)}/>
-        <button className="buttonFunct" onClick={() => {
-          getVotes(rPollName)
-          setRPollName("");
-        }}> See all votes from poll </button>
-        {
-          votes.map((v) => {return <li key={v}>{v}</li>})
-        }
+        </div>
+
+
+      </div>
+
+
     </div>
   )
 }
