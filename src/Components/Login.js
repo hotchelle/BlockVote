@@ -3,6 +3,8 @@ import { Alert, Button, Form } from 'react-bootstrap';
 import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from '../context/UserAuthContext';
 
+import logo from "./Assets/Logo.png";
+
 const Login = () => {
     
     //Setting the email value
@@ -38,6 +40,7 @@ const Login = () => {
     }
     return (
         <>
+            <div><img src={logo} class="home-ribbon"/></div>
             <div className='p-4 box'>
                 <h2 className='mb-3'>Login</h2>
                 {error && <Alert variant='danger'>{error}</Alert>}

@@ -5,8 +5,7 @@ import abi from "../utils/ProjectManager.json"
 
 import logo from "./Assets/Logo.png";
 
-
-const Vote =  () => {
+const CreatePoll =  () => {
   const [userAccount, setUserAccount] = useState("");
   const [newPollName, setnewPollName] = useState("");
   const [votePoll, setvotePoll] = useState("");
@@ -109,33 +108,24 @@ const getVotes = async (pollName) => {
     isWalletConnected()
   }, [])
   return (
-    
     <div className="demoDiv">
-      
-
-  
       <div><img src={logo} class="vote-ribbon"/></div>
-
       <div className="vote-header">
-        <h2>Place a Vote</h2>
-        <h4>Connect your wallet below and select a poll to place a vote in</h4>
+        <h2>Create A Poll</h2>
+        <h4>Connect your wallet below and enter a name to create a poll</h4>
         {!userAccount &&  <button className="buttonFunct" onClick={() => connectToWallet()}> Connect to Wallet </button>}
-        <div className ="vote">
-          <input className="inputFunct" placeholder="Poll Name" type = "text" value={votePoll} onChange={(event) => setvotePoll(event.target.value)}/>
+        <div className="vote">
+        <input className="inputFunct" placeholder="Poll Name" type = "text" value = {newPollName} onChange={(event) => setnewPollName(event.target.value)}/>
         </div>
-        <div className ="vote">
-        <input className="inputFunct" placeholder="Vote (Yes/No)" type = "text" value={vote} onChange={(event) => setVote(event.target.value)}/>
-        </div>
-        <div className = "vote">
+        <div className="vote">
         <button className="buttonFunct" onClick={() => {
-          addVote(votePoll, vote)
-          setvotePoll("")
-          setVote("")
-        }}> Add vote to poll </button>
+          createPoll(newPollName)
+          setnewPollName("Enter new poll name")
+        }}> Create Poll </button>
         </div>
       </div>
     </div>
   )
 }
 
-export default Vote;
+export default CreatePoll;

@@ -2,11 +2,6 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { useUserAuth } from '../context/UserAuthContext';
 
-
-
-
-
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import img1 from "./Assets/img1.png";
 import img2 from "./Assets/img2.png";
@@ -22,9 +17,6 @@ import "./styles.css";
 
 // import required modules
 import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
-
-
-
 
 
 
@@ -44,9 +36,19 @@ const Home = () => {
   }
   return (
     <>
+    
     <div className = "p-4 box mt-3 text-center">Hello Welcome
     <br/>
     {user && user.email}
+    </div>
+
+    <div id="menu">
+      <ul>
+      <li><a href="http://localhost:3000/home">Home</a></li> 
+      <li><a href="http://localhost:3000/poll">Create Poll</a></li> 
+      <li><a href="http://localhost:3000/vote">Cast Vote</a></li> 
+      <li><a href="http://localhost:3000/results">Poll Results</a></li> 
+      </ul>
     </div>
     
     

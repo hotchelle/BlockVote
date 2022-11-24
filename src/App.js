@@ -10,6 +10,8 @@ import ProtectedRoute from './Components/ProtectedRoute';
 import Home from './Components/Home';
 import ResetPassword from './Components/ResetPassword';
 import Demo from './Components/Functionalities';
+import CreatePoll from './Components/CreatePoll';
+import Results from './Components/Results'
 
 function App() {
   return (
@@ -20,14 +22,16 @@ function App() {
             <Routes>
               <Route path="/home" element={
               <ProtectedRoute>
-                <Demo/>
+                <Home/>
               </ProtectedRoute>
             }/>
               <Route path="/" element={<Login />} />
               <Route path = "/RecoverPassword" element= {<ResetPassword/>}/>
               <Route path="/Register" element={<Register />} />
               <Route path="/Landing" element={<Landing />} />
+              <Route path="/Results" elements={<Results /> } />
               <Route path="/Vote" element={<Vote />} />
+              <Route path="/Poll" element={<CreatePoll/>} />
               <Route path="/Demo" element={<Demo />} />
             </Routes>
           </UserAuthContextProvider>
