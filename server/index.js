@@ -120,6 +120,8 @@ app.post('/vote', (req, res) => {
 // gets the poll history of a user
 app.get('/pollhistory', (req, res) => {
 
+    const publicKey = req.body.publicKey;
+
     const sqlSelect = "SELECT pollTitle FROM POLL JOIN REGISTEREDVOTERS ON POLL.pollID = REGISTEREDVOTERS.pollID JOIN ACCOUNTS ON REGISTEREDVOTERS.publicKey = ACCOUNTS.publicKey WHERE ACCOUNTS.publicKey = ?";
     db.query(sqlSelect, [publicKey], (err, result) => {
         if (err) {
@@ -133,6 +135,9 @@ app.get('/pollhistory', (req, res) => {
 
 // gets the results of a poll
 app.get('/pollresult', (req, res) => {
+
+    const pollID = req.body.pollID;
+
     const sqlSelect = "SELECT COUNT(VOTE), VOTE FROM POLL JOIN REGISTEREDVOTERS ON POLL.pollID = REGISTEREDVOTERS.pollID JOIN VOTES ON REGISTEREDVOTERS.publicKey = VOTES.publicKey WHERE POLL.pollID = ? GROUP BY VOTE";
     db.query(sqlSelect, [pollID], (err, result) => {
         if (err) {
@@ -147,6 +152,9 @@ app.get('/pollresult', (req, res) => {
 
 // gets the pollID from the database
 app.get('/pollresult', (req, res) => {
+
+    publicKey = req.body.publicKey;
+
     const sqlSelect = "SELECT pollID FROM POLL JOIN REGISTEREDVOTERS ON POLL.pollID = REGISTEREDVOTERS.pollID JOIN ACCOUNTS ON REGISTEREDVOTERS.publicKey = ACCOUNTS.publicKey WHERE ACCOUNTS.publicKey = ?";
     db.query(sqlSelect, [publicKey], (err, result) => {
         if (err) {
@@ -159,8 +167,10 @@ app.get('/pollresult', (req, res) => {
 });
 
 // gets the user public key from the database
-
 app.get('/pollresult', (req, res) => {
+
+    const email = req.body.email;
+
     const sqlSelect = "SELECT publicKey FROM ACCOUNTS WHERE email = ?";
     db.query(sqlSelect, [email], (err, result) => {
         if (err) {
