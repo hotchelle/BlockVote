@@ -102,6 +102,7 @@ body {
 }
 
 
+
 #menu ul { 
   font-family: 'Rubik', sans-serif;
 	margin: 2px; 
@@ -126,3 +127,20 @@ body {
 	color: #0D6EFD; 
 	
 	} 
+
+.question-card{
+  width: 26rem;
+}
+.space{
+  margin-bottom: 10px;
+
+}
+
+.space2{
+  margin-top: 5px;
+
+}
+
+.center-text{
+ text-align: center;
+}

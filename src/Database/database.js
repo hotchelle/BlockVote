@@ -8,3 +8,6 @@ var connection = mysql.createConnection({
 });
 
 // use info from mysql server configuration 
+
+
+

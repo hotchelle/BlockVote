@@ -109,13 +109,8 @@ const getVotes = async (pollName) => {
     isWalletConnected()
   }, [])
   return (
-    
     <div className="demoDiv">
-      
-
-  
       <div><img src={logo} class="vote-ribbon"/></div>
-
       <div className="vote-header">
         <h2>Place a Vote</h2>
         <h4>Connect your wallet below and select a poll to place a vote in</h4>
