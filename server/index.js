@@ -13,8 +13,8 @@ app.use(bp.urlencoded({ extended: true }))
 db = mysql.createConnection({
     user: "root",
     host: "localhost",
-    password: "password",
-    database: "Blockvote",
+    password: "rootuser",
+    database: "BlockVote",
 });
 
 // Insertion to database using POST method for user registration
@@ -123,6 +123,43 @@ app.post('/vote', (req, res) => {
             res.send("values inserted");
         }
     });
+});
+
+
+
+
+// STILL NEEDS TO BE TESTED
+app.post('/getquestion', (req, res) => {
+    console.log(req)
+    const PollID = req.body.pollID;
+
+    const sqlSelect = "SELECT pollTitle FROM POLL ON POLL.pollID = ?";
+    db.query(sqlSelect, [PollID], (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.send(result);
+        }
+    })
+   
+});
+
+
+// STILL NEEDS TO BE TESTED
+app.get('/getchoices', (req, res) => {
+    const PollID = req.body.PollID;
+
+    //const sqlSelect = "SELECT pollTitle FROM POLL ON POLL.pollID = ?";
+    db.query(sqlSelect, [PollID], (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.send(result);
+        }
+    })
+   
 });
 
 

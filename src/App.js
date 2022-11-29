@@ -38,6 +38,7 @@ function App() {
               <Route path="/Poll" element={<CreatePoll/>} />
               <Route path="/Demo" element={<Demo />} />
               <Route path="/CardComponent" element={<CardComponent />} />
+              <Route path="/Join" element={<JoinPoll />} />
             </Routes>
           </UserAuthContextProvider>
         </Col>
