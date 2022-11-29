@@ -33,7 +33,7 @@ function App() {
               <Route path = "/RecoverPassword" element= {<ResetPassword/>}/>
               <Route path="/Register" element={<Register />} />
               <Route path="/Landing" element={<Landing />} />
-              <Route path="/Results" elements={<Results /> } />
+              {/* <Route path="/Results" elements={<Results /> } /> */}
               <Route path="/Vote" element={<Vote />} />
               <Route path="/Poll" element={<CreatePoll/>} />
               <Route path="/Demo" element={<Demo />} />

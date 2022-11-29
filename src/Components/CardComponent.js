@@ -1,7 +1,7 @@
 import React , {useState} from 'react';
 import {Card, Table, Form, Button, Row, Col } from "react-bootstrap"
 
-
+import axios from "axios";
 const CardComponent = () => {
   const [question, setQuestion] = useState("")
   const [option1, setOption1] = useState("")
@@ -11,7 +11,19 @@ const CardComponent = () => {
 
 
   const submitPoll = () => {
-    // TODO : push information in form to database
+
+
+
+    axios.post("http://localhost:3001/poll", {
+        pollID : 1,
+        pollTitle : question,
+        pollAdminKey : "abc@gmail.com",
+        pollStartDate : "11/28/22",
+        pollEndDate : "11/29/22"
+      })
+      .then((response) => {
+        console.log(response)
+      });
   }
 
 
@@ -55,7 +67,8 @@ const CardComponent = () => {
       <Card.Footer>
         <div className='d-grid gap-2 md-5'>
          <Row >
-          <Button variant="primary" type="Submit" size='md' onClick={ () => {
+          <Button variant="primary" type="Submit" size='md' onClick={ (event) => {
+            event.preventDefault();
             submitPoll()
           }}>
               Submit 

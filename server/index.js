@@ -2,13 +2,18 @@ const express = require('express');
 const app = express();
 const mysql = require('mysql');
 const cors = require('cors');
+const bp = require('body-parser')
 
 app.use(cors());
 
-mysql.createConnection({
+app.use(bp.json())
+app.use(bp.urlencoded({ extended: true }))
+
+
+db = mysql.createConnection({
     user: "root",
     host: "localhost",
-    password: "abood2110",
+    password: "password",
     database: "Blockvote",
 });
 
@@ -39,10 +44,12 @@ app.post('/poll', (req, res) => {
     const pollTitle = req.body.pollTitle;
     const pollAdminKey = req.body.pollAdminKey;
     const pollStartDate = req.body.pollStartDate;
-    const pollEndDate = req.body.pollEndDate;
+    const pollEndDate =  req.body.pollEndDate;
 
 
-    const sqlInsert = "INSERT INTO Accounts (pollID, pollTitle, pollAdminKey, pollStartDate, pollEndDate) VALUES (?,?,?,?,?)";
+    console.log(pollID, pollTitle)
+
+    const sqlInsert = "INSERT INTO Polls (pollID, pollTitle, pollAdminKey, pollStartDate, pollEndDate) VALUES (?,?,?,?,?)";
     db.query(sqlInsert, [pollID, pollTitle, pollAdminKey, pollStartDate, pollEndDate], (err, result) => {
         
         if (err) {
@@ -75,27 +82,29 @@ app.post('/vote', (req, res) => {
 });
 
 //  insert a question to the database
-app.post('/poll', (req, res) => {
+// app.post('/poll', (req, res) => {
+
+//     console.error(req.body)
   
-    const pollID = req.body.pollID;
-    const questionID = req.body.questionID;
-    const questionType = req.body.questionType;
-    const questionTitle = req.body.questionTitle;
-    const questionAnswer = req.body.questionAnswer;
+//     // const pollID = req.body.pollID;
+//     // const questionID = req.body.questionID;
+//     // const questionType = req.body.questionType;
+//     // const questionTitle = req.body.questionTitle;
+//     // const questionAnswer = req.body.questionAnswer;
 
 
 
     
-    const sqlInsert = "INSERT INTO QUESTIONS (pollID, questionID, questionType, questionTitle, questionAnswer) VALUES (?,?,?,?,?)";
-    db.query(sqlInsert, [pollID, questionID, questionType, questionTitle, questionAnswer], (err, result) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            res.send("values inserted");
-        }
-    });
-});
+//     // const sqlInsert = "INSERT INTO QUESTIONS (pollID, questionID, questionType, questionTitle, questionAnswer) VALUES (?,?,?,?,?)";
+//     // db.query(sqlInsert, [pollID, questionID, questionType, questionTitle, questionAnswer], (err, result) => {
+//     //     if (err) {
+//     //         console.log(err);
+//     //     }
+//     //     else {
+//     //         res.send("values inserted");
+//     //     }
+//     // });
+// });
 
 
 app.post('/vote', (req, res) => {
