@@ -8,7 +8,7 @@ const JoinPoll  = () => {
 
   const navigate = useNavigate();
   const [pollId, setPollId] = useState("")
-
+  
   const getPoll = () => {
 
     console.log("getPoll clicked, poll_id:")
@@ -17,7 +17,7 @@ const JoinPoll  = () => {
        params: { pollID : pollId}
       })
       .then((response) => {
-        console.log(response.data)
+        console.log(response.data[0].choices)
       });
   }
 

@@ -69,9 +69,67 @@ app.get('/getQuestion', (req, res) => {
 });
 
 
+app.post("/registerVoter", (req, res) => {
+    const emailAddress = req.body.emailAddress
+    const pollID  = req.body.pollID
+
+    const sqlInsert = "INSERT INTO Polls (emailAddress, pollID) VALUES (?,?)";
+    db.query(sqlSelect, [emailAddress,PollID], (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.send(result);
+        }
+    })
+})
 
 
+app.get("/getRegisteredVoters", (req, res) => {
+    const PollID = req.query.pollID;
+    const sqlSelect = "SELECT emailAddress FROM RegisteredVoters WHERE pollID = ?";
+    db.query(sqlSelect, [PollID], (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.send(result);
+        }
+    })
 
+})
+
+app.post('/vote', (req, res) => {
+    const userEmail = req.body.email;
+    const PollID = req.body.pollID;
+    const vote = req.body.vote;
+
+    const sqlInsert = "INSERT INTO Votes (emailAddress, pollID, vote) , VALUES (?, ?, ?)";
+    db.query(sqlInsert, [userEmail, PollID, vote], (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.send(result);
+        }
+    })
+
+});
+
+
+app.get('/answers', (req, res) => {
+    const PollID = req.query.pollID;
+
+    const sqlSelect = "SELECT * FROM Votes WHERE pollID = ?";
+    db.query(sqlSelect, [PollID], (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.send(result);
+        }
+    })
+})
 
 
 

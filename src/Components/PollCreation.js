@@ -12,7 +12,7 @@ const PollCreation  = () => {
         </Card.Text>
         <Row>
         <Button variant="primary" className='space'  onClick = {() => {navigate("./CardComponent")}}>Create Poll</Button>
-        <Button variant="primary">Join Poll</Button>
+        <Button variant="primary" onClick = {() => {navigate("./Join")}}>Join Poll</Button>
         </Row>
       </Card.Body>
     </Card>

@@ -29,7 +29,7 @@ function App() {
                 <Home/>
               </ProtectedRoute>
             }/>
-              <Route path="/" element={<JoinPoll />} />
+              <Route path="/" element={<PollCreation />} />
               <Route path = "/RecoverPassword" element= {<ResetPassword/>}/>
               <Route path="/Register" element={<Register />} />
               <Route path="/Landing" element={<Landing />} />
