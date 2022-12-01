@@ -1,25 +1,30 @@
 import React , {useState} from 'react';
 import {Card, Table, Form, Button, Row, Col } from "react-bootstrap"
-
+import { useUserAuth } from '../context/UserAuthContext';
 import axios from "axios";
 const CardComponent = () => {
+  const [pollTitle, setpollTitle] = useState("")
   const [question, setQuestion] = useState("")
   const [option1, setOption1] = useState("")
   const [option2, setOption2] = useState("")
   const [option3, setOption3] = useState("")
   const [option4, setOption4] = useState("")
-
+  const { user,logOut } = useUserAuth();
 
   const submitPoll = () => {
 
+    // const pollTitle = req.body.pollTitle
+    // const pollAdminAddr = req.body.pollAdminAddr
+    // const questions = req.body.questions
+    // const choices = req.body.choices
 
+    const choices = option1 + "," + option2 + "," +  option3 + "," + option4;
 
-    axios.post("http://localhost:3001/poll", {
-        pollID : 1,
-        pollTitle : question,
-        pollAdminKey : "abc@gmail.com",
-        pollStartDate : "11/28/22",
-        pollEndDate : "11/29/22"
+    axios.post("http://localhost:3001/createPoll", {
+        pollTitle : pollTitle,
+        question : question, 
+        choices : choices,
+        pollAdminAddr : "random.gmail.com"
       })
       .then((response) => {
         console.log(response)
@@ -33,6 +38,12 @@ const CardComponent = () => {
       <Card.Header> Enter Question </Card.Header>
       <Form id = "poll">
       <Card.Body>
+          <Row>
+            <Form.Group  as = {Col}>
+              <Form.Label>Poll Title</Form.Label>
+              <Form.Control type="text" placeholder="Enter poll title" name = "title" value={pollTitle} onChange={(event) => {setpollTitle(event.target.value)}}/>
+            </Form.Group>
+          </Row>
           <Row>
             <Form.Group  as = {Col}>
               <Form.Label>Question Title</Form.Label>

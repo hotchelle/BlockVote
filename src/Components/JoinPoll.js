@@ -13,14 +13,12 @@ const JoinPoll  = () => {
 
     console.log("getPoll clicked, poll_id:")
 
-    axios.post("http://localhost:3001/getquestion", {
-        pollID : "blue"
+    axios.get("http://localhost:3001/getQuestion", {
+       params: { pollID : pollId}
       })
       .then((response) => {
-        console.log(response)
+        console.log(response.data)
       });
-
-
   }
 
 
