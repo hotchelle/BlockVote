@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { useUserAuth } from '../context/UserAuthContext';
 import ResultsAdpater from './ResultsAdapter';
+import { useNavigate } from 'react-router-dom';
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import img1 from "./Assets/img1.png";
@@ -23,12 +24,15 @@ import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
 
 const Home = () => {
   const { user,logOut } = useUserAuth();
+  const navigate = useNavigate();
+
   console.log(user);
   const handleLogOut = async() =>
   {
     try
     {
-      await logOut()
+      await logOut();
+      navigate("/");
     }
     catch(err)
     {

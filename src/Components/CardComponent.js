@@ -73,12 +73,12 @@ const CardComponent = () => {
     // const choices = req.body.choices
     
     const choices = option1 + "," + option2 + "," +  option3 + "," + option4;
-
+    console.log(user.email)
     axios.post("http://localhost:3001/createPoll", {
         pollTitle : pollTitle,
         question : question, 
         choices : choices,
-        pollAdminAddr : "random.gmail.com"
+        pollAdminAddr : user && user.email
       })
       .then((response) => {
         console.log(response)

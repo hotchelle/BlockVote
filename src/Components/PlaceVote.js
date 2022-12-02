@@ -6,6 +6,7 @@ import {ethers} from "ethers";
 import { getContractAddress, poll } from "ethers/lib/utils";
 import abi from "../utils/ProjectManager.json"
 import axios from "axios";
+import { useUserAuth } from '../context/UserAuthContext';
 
 
 
@@ -19,8 +20,7 @@ const PlaceVote = () => {
   const {pollId ,questions, choices, pollTitle} = state;
   const options = choices.split(",")
   const [vote, setVote] = useState("")
-
-
+  const { user,logOut } = useUserAuth();
 
 const addVote = async (pollTitle, vote) => {
   const {ethereum}  = window
@@ -46,7 +46,7 @@ const addVote = async (pollTitle, vote) => {
     // subit vote into the database for the user 
     axios.post("http://localhost:3001/vote", {
       pollId : pollId, 
-      email : "testing123@gmail.com", 
+      email : user && user.email,
       vote : vote
     })
     .then((response) => {
@@ -83,7 +83,8 @@ const addVote = async (pollTitle, vote) => {
         <Button variant="primary" type="Submit" size='md' onClick={ (event) => {
           event.preventDefault();
           addVote(pollTitle, vote)
-          // submitPoll()
+          submitPoll()
+          
         }}>
             Submit 
         </Button>
