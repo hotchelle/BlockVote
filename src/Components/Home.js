@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { useUserAuth } from '../context/UserAuthContext';
+import ResultsAdpater from './ResultsAdapter';
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import img1 from "./Assets/img1.png";
@@ -47,7 +48,7 @@ const Home = () => {
       <li><a href="http://localhost:3000/home">Home</a></li> 
       <li><a href="http://localhost:3000/poll">Create Poll</a></li> 
       <li><a href="http://localhost:3000/vote">Cast Vote</a></li> 
-      <li><a href="http://localhost:3000/results">Poll Results</a></li> 
+      <li><a href="http://localhost:3000/ResultsAdapter">Poll Results</a></li> 
       </ul>
     </div>
     

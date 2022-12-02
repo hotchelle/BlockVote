@@ -118,10 +118,10 @@ app.post('/vote', (req, res) => {
 
 
 app.get('/answers', (req, res) => {
-    const PollID = req.query.pollID;
+    const pollTitle = req.query.pollTitle;
 
-    const sqlSelect = "SELECT * FROM Votes WHERE pollID = ?";
-    db.query(sqlSelect, [PollID], (err, result) => {
+    const sqlSelect = "SELECT Count(VOTE) as 'number', VOTE FROM VOTES JOIN POLLS ON POLLS.POLLID = VOTES.POLLID WHERE POLLS.POLLTITLE = ? group by VOTE";
+    db.query(sqlSelect, [pollTitle], (err, result) => {
         if (err) {
             console.log(err);
         }
@@ -131,6 +131,21 @@ app.get('/answers', (req, res) => {
     })
 })
 
+
+app.get('/title', (req, res) => {
+    const emailAddress = req.query.emailAddress;
+
+    const sqlSelect = "SELECT DISTINCT POLLS.pollTitle FROM POLLS JOIN VOTES ON POLLS.POLLID = VOTES.POLLID WHERE VOTES.EMAILADDRESS = ?";
+    db.query(sqlSelect, [emailAddress], (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.send(result);
+            console.log(result)
+        }
+    })
+})
 
 
 app.listen(3001, () => {
