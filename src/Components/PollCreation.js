@@ -21,8 +21,8 @@ const PollCreation  = () => {
          Please either join a poll with your provided ID or create a Poll
         </Card.Text>
         <Row>
-        <Button variant="primary" className='space'  onClick = {() => {navigate("./CardComponent")}}>Create Poll</Button>
-        <Button variant="primary" className='space'  onClick = {() => {navigate("./Join")}}>Join Poll</Button>
+        <Button variant="primary" className='space'  onClick = {() => {navigate("/CardComponent")}}>Create Poll</Button>
+        <Button variant="primary" className='space'  onClick = {() => {navigate("/Join")}}>Join Poll</Button>
         <Button variant="primary" className='space' onClick = {() => {toResults()}}>Results</Button>
         </Row>
       </Card.Body>
