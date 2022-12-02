@@ -56,7 +56,7 @@ app.post("/createPoll", (req, res ) => {
 app.get('/getQuestion', (req, res) => {
     const PollID = req.query.pollID;
 
-    const sqlSelect = "SELECT questions,choices choices FROM POLLS WHERE pollID = ?";
+    const sqlSelect = "SELECT questions, choices, pollTitle FROM POLLS WHERE pollID = ?";
     db.query(sqlSelect, [PollID], (err, result) => {
         if (err) {
             console.log(err);
@@ -101,11 +101,11 @@ app.get("/getRegisteredVoters", (req, res) => {
 
 app.post('/vote', (req, res) => {
     const userEmail = req.body.email;
-    const PollID = req.body.pollID;
+    const pollId = req.body.pollId;
     const vote = req.body.vote;
 
-    const sqlInsert = "INSERT INTO Votes (emailAddress, pollID, vote) , VALUES (?, ?, ?)";
-    db.query(sqlInsert, [userEmail, PollID, vote], (err, result) => {
+    const sqlInsert = "INSERT INTO Votes (emailAddress, pollId, vote) VALUES (?, ?, ?)";
+    db.query(sqlInsert, [userEmail, pollId, vote], (err, result) => {
         if (err) {
             console.log(err);
         }

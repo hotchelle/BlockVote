@@ -16,7 +16,8 @@ import Results from './Components/Results'
 import PollCreation from './Components/PollCreation';
 import CardComponent from './Components/CardComponent';
 import JoinPoll from './Components/JoinPoll';
-
+import PlaceVote from "./Components/PlaceVote"
+import Functionalities from './Components/Functionalities';
 function App() {
   return (
     <Container>
@@ -24,11 +25,6 @@ function App() {
         <Col>
           <UserAuthContextProvider>
             <Routes>
-              <Route path="/home" element={
-              <ProtectedRoute>
-                <Home/>
-              </ProtectedRoute>
-            }/>
               <Route path="/" element={<PollCreation />} />
               <Route path = "/RecoverPassword" element= {<ResetPassword/>}/>
               <Route path="/Register" element={<Register />} />
@@ -39,6 +35,7 @@ function App() {
               <Route path="/Demo" element={<Demo />} />
               <Route path="/CardComponent" element={<CardComponent />} />
               <Route path="/Join" element={<JoinPoll />} />
+              <Route path="/PlaceVote" element={<PlaceVote />} />
             </Routes>
           </UserAuthContextProvider>
         </Col>

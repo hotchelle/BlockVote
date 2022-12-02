@@ -4,20 +4,18 @@ import {Button , Card , Row, Form, Col} from "react-bootstrap"
 import axios from "axios";
 
 const JoinPoll  = () => {
-
-
   const navigate = useNavigate();
   const [pollId, setPollId] = useState("")
-  
-  const getPoll = () => {
 
-    console.log("getPoll clicked, poll_id:")
+  const getPoll = () => {
 
     axios.get("http://localhost:3001/getQuestion", {
        params: { pollID : pollId}
       })
       .then((response) => {
-        console.log(response.data[0].choices)
+        console.log(response.data[0])
+        navigate("/PlaceVote", {state : {pollId: pollId, questions : response.data[0].questions, choices : response.data[0].choices, pollTitle : response.data[0].pollTitle}})
+        
       });
   }
 

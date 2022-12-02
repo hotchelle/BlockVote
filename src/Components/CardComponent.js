@@ -1,8 +1,18 @@
-import React , {useState} from 'react';
+import React , {useState, useEffect } from 'react';
 import {Card, Table, Form, Button, Row, Col } from "react-bootstrap"
 import { useUserAuth } from '../context/UserAuthContext';
+import {Contract, ethers} from "ethers";
+import { getContractAddress, poll } from "ethers/lib/utils";
+import abi from "../utils/ProjectManager.json"
 import axios from "axios";
+
+
+
 const CardComponent = () => {
+  const [userAccount, setUserAccount] = useState("");
+  const contractAddress = "0xda0A849294d73D0ab6e497bF43A8e9D523F32427";
+  const contractABI = abi.abi;
+
   const [pollTitle, setpollTitle] = useState("")
   const [question, setQuestion] = useState("")
   const [option1, setOption1] = useState("")
@@ -11,13 +21,57 @@ const CardComponent = () => {
   const [option4, setOption4] = useState("")
   const { user,logOut } = useUserAuth();
 
+  const isWalletConnected = async() => {
+    try{
+      // when the user is logged into their crypto wallet, they will have an object called ethereum available to use
+     const {ethereum} = window;
+     if (ethereum === undefined) {
+      alert("A crypto wallet is required, download Metamask");
+      return;
+      } 
+    const accounts = await ethereum.request({method:"eth_accounts"});
+    if (accounts.length !== 0){
+      const account = accounts[0];
+      // console.log("Authorized account: ", account);
+      setUserAccount(account);
+      }else console.warn("No authorized account found");
+    }catch(error){
+      alert(error)
+    }
+  }
+
+  const createPoll = async (pollName) => {
+    try{
+      const {ethereum} = window;
+      if (ethereum === undefined){
+        alert("Please download ethereum wallet: Metamask");
+        return;
+      }
+      // Provider is what we use to talk to Ethereum nodes for deployment
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      // get the signer of the contract returns an object
+      const signer = await provider.getSigner();
+      const contract = new ethers.Contract(contractAddress, contractABI, signer);
+      let new_poll = await contract.createPoll(pollTitle);
+      console.log(`Poll ${pollTitle} was created successfully`);
+      // let new_vote = await contract.insertVote("Test",signerAddress, "Working 13 ???");
+      // let all_votes = await contract.retrieveVotes("Test")
+      // console.log(`All votes: ${all_votes}`)
+      // all_votes = await contract.retrieveVotes("Test")
+      // console.log(`All votes: ${all_votes}`)
+    }catch(error){
+      console.warn(error);
+    }
+  }
+
+
   const submitPoll = () => {
 
     // const pollTitle = req.body.pollTitle
     // const pollAdminAddr = req.body.pollAdminAddr
     // const questions = req.body.questions
     // const choices = req.body.choices
-
+    
     const choices = option1 + "," + option2 + "," +  option3 + "," + option4;
 
     axios.post("http://localhost:3001/createPoll", {
@@ -30,7 +84,9 @@ const CardComponent = () => {
         console.log(response)
       });
   }
-
+    useEffect(() => {
+      isWalletConnected()
+    }, [])
 
     return (
       <div> 
@@ -81,6 +137,7 @@ const CardComponent = () => {
           <Button variant="primary" type="Submit" size='md' onClick={ (event) => {
             event.preventDefault();
             submitPoll()
+            createPoll()
           }}>
               Submit 
           </Button>

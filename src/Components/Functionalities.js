@@ -83,6 +83,14 @@ const addVote = async (pollName, vote) => {
   const signer = await provider.getSigner();
   const signerAddress = await signer.getAddress();
   const contract = new ethers.Contract(contractAddress, contractABI, signer);
+
+
+  // console.log("signer: ", signer)
+  // console.log("signerAddress: ", signerAddress)
+  // console.log("contract: ", contract)
+
+
+
   await contract.insertVote(pollName, signerAddress, vote);
 }
 
