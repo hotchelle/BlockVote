@@ -31,7 +31,7 @@ const Login = () => {
         try{
             setError("");
             await logIn(email,password);
-            navigate("/home");
+            navigate("/PollCreation");
         }
         catch(err)
         {
